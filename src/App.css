@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.navbar {
+  background-color: #352F44;
+  margin-right: auto;
+  padding: 15px;
+}
+.navbar2 {
+  background-color: #d091b7;
+  margin-right: auto;
+  padding: 15px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-item {
+  font-size: 25px;
+  position: relative;
+  left: 90%;
+  top: 0;
+  border-radius: 5px;
+  border: 0;
+  padding: 5px 16px;
+  background-color: #A2678A;
+  cursor: pointer;
+}
+.nav-item2{
+  font-size: 25px;
+  position: relative;
+  left: 88%;
+  top: 0;
+  border-radius: 5px;
+  border: 0;
+  padding: 5px 16px;
+  background-color: #A2678A;
+  cursor: pointer;
+}
+.cart{
+  position: relative;
+  left: 95%;
+  top: 0;
+font-size: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-item:hover {
+  background-color: #d091b7;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.form-product {
+  position: absolute;
+  top: 40%;
+  left: 43%;
 }
 
-.App-link {
-  color: #61dafb;
+.form-product input {
+  padding: 10px 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submit {
+  position: absolute;
+  top: 100%;
+  left: 35%;
+  border: 0;
+  border-radius: 5px;
+  border: 0;
+  padding: 5px 16px;
+  background-color: #A2678A;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.table-product {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 90px;
+}
+.cart-view{
+display: block;
 }
