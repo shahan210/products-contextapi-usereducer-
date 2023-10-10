@@ -8,7 +8,7 @@ export default function ProductDetails() {
     return (
         <>
              <nav className='navbar'>
-                <Link  to="/product-details">
+                <Link  to="/">
                     <button className='nav-item2'>Add product</button>
                 </Link>
             </nav>
@@ -18,21 +18,7 @@ export default function ProductDetails() {
                 <div className='cart-view'>{}</div>
             </div>
             </div>
-            <table className='table-product'>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th style={{fontSize:20}}><GrCart /></th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-
-                    </tr>
-                </tbody>
-            </table>
+            
 
         </>
     )

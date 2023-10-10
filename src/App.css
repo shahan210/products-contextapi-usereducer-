@@ -3,6 +3,7 @@
   margin-right: auto;
   padding: 15px;
 }
+
 .navbar2 {
   background-color: #d091b7;
   margin-right: auto;
@@ -20,7 +21,8 @@
   background-color: #A2678A;
   cursor: pointer;
 }
-.nav-item2{
+
+.nav-item2 {
   font-size: 25px;
   position: relative;
   left: 88%;
@@ -31,11 +33,12 @@
   background-color: #A2678A;
   cursor: pointer;
 }
-.cart{
+
+.cart {
   position: relative;
   left: 95%;
   top: 0;
-font-size: 30px;
+  font-size: 30px;
 }
 
 .nav-item:hover {
@@ -43,9 +46,8 @@ font-size: 30px;
 }
 
 .form-product {
-  position: absolute;
-  top: 40%;
-  left: 43%;
+  text-align: center;
+  margin-top: 100px;
 }
 
 .form-product input {
@@ -53,9 +55,8 @@ font-size: 30px;
 }
 
 .submit {
-  position: absolute;
-  top: 100%;
-  left: 35%;
+  margin-bottom: 200px;
+  text-align: center;
   border: 0;
   border-radius: 5px;
   border: 0;
@@ -71,8 +72,40 @@ font-size: 30px;
   width: 100%;
   border: 0;
   font-family: 'Poppins', sans-serif;
-  margin-top: 90px;
 }
-.cart-view{
-display: block;
+
+th,
+td {
+    text-align: center;
+    padding: 16px;
+}
+
+.cart-view {
+  display: block;
+}
+.edit-button {
+  text-align: center;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #526D82;
+  border: 0;
+  font-family: 'Inclusive Sans', sans-serif;
+  padding: 5px 10px ;
+}
+.edit-button:hover {
+  background: #657c8d;
+  transition: .3s;
+}
+.delete-button {
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: rgb(167, 4, 4);
+  border: 0;
+  font-family: 'Inclusive Sans', sans-serif;
+  padding: 5px 10px ;
+}
+.delete-button:hover {
+  background-color: red;
+  transition: .3s;
 }
