@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Textbox, Buttons } from '../Components/Index'
 import { useStateValue } from '../ContextAPI/GlobalState'
@@ -11,41 +11,48 @@ export default function Page() {
     const [price, setPrice] = useState('')
     const [url, setUrl] = useState('')
     const [editProduct, setEdit] = useState('')
+    const [editId, setEditId] = useState(null);
 
-    
     const submitProduct = async (e) => {
         e.preventDefault();
-        let productDetails = [{
+        let productDetails = {
             product: productName,
             price: price,
             url: url,
             id: uuidv4()
-        }]
+        }
         await dispatch({ type: 'ADD_PRODUCT', payload: productDetails })
         setPrice('')
         setProductName('')
         setUrl('')
     }
     const edit = (id) => {
-        const getEditvalues = product.map((itm)=>itm[0])
-        const value =  getEditvalues.map((itm)=>itm)
-        const getValue = value.filter(itm=> itm.id===id)
-        setEdit(getValue)
+        const value = product.map((itm) => itm)
+        const getValue = value.filter(itm => itm.id === id)
         setProductName(getValue[0].product)
         setPrice(getValue[0].price)
         setUrl(getValue[0].url)
+        setEditId(getValue[0].id)
     }
-    const updateProduct = ()=>{
+    const updateProduct = (e) => {
+        e.preventDefault();
+        const getValue = product.forEach((element) => {
+            if (element.id === editId) {
+                element.product = productName
+                element.price = price
+                element.url = url
+            }
+        })
         dispatch({ type: 'EDIT_PRODUCT', payload: product })
-
+        setPrice('')
+        setProductName('')
+        setUrl('')
+        setEditId(null)
     }
 
-    const deleteRow = (id)=>{
-        dispatch({
-            type: "DELETE_PRODUCT",
-            payload: id
-          });
-        }
+    const deleteRow = (id) => {
+        dispatch({ type: "DELETE_PRODUCT", payload: id });
+    }
     return (
         <>
             <nav className='navbar'>
@@ -61,7 +68,7 @@ export default function Page() {
                     <br></br><br></br>
                     <Textbox type='text' placeholder='Url' value={url || ""} onChange={(e) => setUrl(e.target.value)} />
                     <br></br><br></br>
-                    <button onClick={submitProduct} className='submit'>Submit</button>
+                    <Buttons onClick={editId === null ? submitProduct : updateProduct} name={editId === null ? "Submit" : "Update"} className='submit' />
                 </form>
                 <table className='table-product'>
                     <thead>
@@ -75,19 +82,21 @@ export default function Page() {
                     <tbody>
                         {
                             product !== null && product !== undefined && product.length > 0 && product.map((item, i) => {
-                                return (item.map((itm, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{itm.product}</td>
-                                            <td>{itm.price}</td>
-                                            <td>{itm.url}</td>
-                                            <td>
-                                                <Buttons onClick={() => edit(itm.id)} className='edit-button' name="Edit" />
-                                                <Buttons onClick={() => deleteRow(itm.id)} name="Delete" className='delete-button ' />
-                                            </td>
-                                        </tr>
-                                    )
-                                }))
+                                return (
+                                    <tr key={i}>
+                                        <td>
+                                            <span>{item.product}</span>
+                                        </td>
+                                        <td><span>{item.price}</span> </td>
+                                        <td className='ellipsis1' >
+                                            <span className='ellipsis ' >{item.url}</span>
+                                        </td>
+                                        <td>
+                                            <Buttons onClick={() => edit(item.id)} className='edit-button' name="Edit" />
+                                            <Buttons onClick={() => deleteRow(item.id)} name="Delete" className='delete-button ' />
+                                        </td>
+                                    </tr>
+                                )
                             }
                             )
                         }

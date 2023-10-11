@@ -9,29 +9,40 @@ export const reducer = (state, action) => {
     case 'ADD_PRODUCT':
       return {
         ...state,
-        product: [...state.product, action.payload],
+        product: [...state.product, action.payload]
       }
     case 'EDIT_PRODUCT':
-      const editProduct = action.payload;
-      const updatedProduct = state.product.map((eproduct) => {
-        if (eproduct.id === editProduct.id) {
-          return editProduct;
+      const updatedProduct = action.payload
+      const editProducts = state.product.map((itm) => {
+        if (itm.id === updatedProduct.id) {
+          return updatedProduct
         }
-        return eproduct;
+        return itm
       })
       return {
         ...state,
-        product: updatedProduct,
+        product: editProducts
       }
     case 'DELETE_PRODUCT':
       return {
         ...state,
-        product: state.product.map((itm) =>
-          itm.filter((item)=>item.id !== action.payload)
-        )
-      };
+        product: state.product.filter((item) => item.id !== action.payload)
+      }
     case 'ADD_TO_CART':
-      return { ...state, }
+      const valueAdded = action.payload
+      console.log(valueAdded)
+      if (state.cart.find(itm => itm.id === valueAdded.id)) {
+        return state
+      }
+      return {
+        ...state,
+        cart: [...state.cart, valueAdded]
+      }
+    case 'DELETE_FROM_CART':
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload)
+      }
     default:
       return state;
   }
