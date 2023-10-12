@@ -64,6 +64,7 @@
 
 .form-product input {
   padding: 10px 40px;
+  margin-bottom: 20px;
 }
 
 .submit {
@@ -84,7 +85,7 @@
   border-spacing: 0;
   width: 100%;
   border: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'pinPops', sans-serif;
   position: relative;
 }
 
@@ -217,7 +218,6 @@ td {
   left: 85%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: #60c95d;
   color: white;
   font-size: 25px;
   border: none;
@@ -230,6 +230,7 @@ td {
   justify-content: center;
   align-items: center;
   opacity: .7;
+  background-color: red;
 }
 .add-cart:hover{
   transition: .3s;
@@ -237,8 +238,13 @@ td {
   opacity: 1;
   width: 40px;
   height: 40px;
-
-
+}
+.add-cross:hover{
+  transition: .3s;
+  font-size: 30px;
+  opacity: 1;
+  width: 40px;
+  height: 40px;
 }
 
 .cont {

@@ -30,7 +30,6 @@ export const reducer = (state, action) => {
       }
     case 'ADD_TO_CART':
       const valueAdded = action.payload
-      console.log(valueAdded)
       if (state.cart.find(itm => itm.id === valueAdded.id)) {
         return state
       }

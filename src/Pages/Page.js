@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 import { Textbox, Buttons } from '../Components/Index'
 import { useStateValue } from '../ContextAPI/GlobalState'
 import { v4 as uuidv4 } from 'uuid';
-// import { Buttons } from '../Components/Index'
+import {AiFillExclamationCircle} from 'react-icons/ai'
 
 export default function Page() {
     const [{ product }, dispatch] = useStateValue();
     const [productName, setProductName] = useState('')
     const [price, setPrice] = useState('')
     const [url, setUrl] = useState('')
-    const [editProduct, setEdit] = useState('')
     const [editId, setEditId] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const submitProduct = async (e) => {
         e.preventDefault();
@@ -20,6 +20,18 @@ export default function Page() {
             price: price,
             url: url,
             id: uuidv4()
+        }
+        const validationErrors = {}
+        setErrors(validationErrors)
+        if (productName == "") {
+            validationErrors.productName = "Enter a Product Name "
+        }
+        if(price == 0 && price == "") {
+            validationErrors.price = "Enter an amount"
+        }
+         if(url == "") {
+            validationErrors.url = "Enter an url"
+            return
         }
         await dispatch({ type: 'ADD_PRODUCT', payload: productDetails })
         setPrice('')
@@ -62,12 +74,22 @@ export default function Page() {
             </nav>
             <div style={{ position: 'relative' }}>
                 <form className='form-product'>
-                    <Textbox type='text' placeholder='Product' value={productName || ""} onChange={(e) => setProductName(e.target.value)} />
-                    <br></br><br></br>
-                    <Textbox type='number' placeholder='Enter the price' value={price || ""} onChange={(e) => setPrice(e.target.value)} />
-                    <br></br><br></br>
-                    <Textbox type='text' placeholder='Url' value={url || ""} onChange={(e) => setUrl(e.target.value)} />
-                    <br></br><br></br>
+                    
+                    <div>
+                        <Textbox type='text' placeholder='Product' value={productName || ""} onChange={(e) => setProductName(e.target.value)} />
+                        {errors.productName && <p style={{ fontFamily:"'pinPops', sans-serif", fontSize: 12, color: 'red' }}><AiFillExclamationCircle/> {errors.productName}</p>}
+                    </div>
+                    <div>
+                        <Textbox type='number' placeholder='Enter the price' value={price || ""} onChange={(e) => setPrice(e.target.value)} />
+                        {errors.price && <p style={{ fontFamily:"'pinPops', sans-serif", fontSize: 12, color: 'red' }}><AiFillExclamationCircle/> {errors.price}</p>}
+
+                    </div>
+                    <div>
+                        <Textbox type='text' placeholder='Url' value={url || ""} onChange={(e) => setUrl(e.target.value)} />
+                        {errors.url && <p style={{ fontFamily:"'pinPops', sans-serif", fontSize: 12, color: 'red' }}><AiFillExclamationCircle/> {errors.url}</p>}
+
+                    </div>
+
                     <Buttons onClick={editId === null ? submitProduct : updateProduct} name={editId === null ? "Submit" : "Update"} className='submit' />
                 </form>
                 <table className='table-product'>

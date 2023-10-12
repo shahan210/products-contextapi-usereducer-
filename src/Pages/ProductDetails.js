@@ -1,18 +1,22 @@
 import { GrCart } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../ContextAPI/GlobalState'
-import { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import {  Buttons } from '../Components/Index'
+import {RxCross2} from 'react-icons/rx'
 
 
 export default function ProductDetails() {
     const [{ product, cart }, dispatch] = useStateValue()
-    const [isInCart, setIsInCart] = useState(false);
-
-    const addToCart = (id) => {
-        const getCartvalues = product.find(itm => itm.id === id )
+   
+    const cartAdding = (id) => {
+        const getCartvalues = product.find(itm => itm.id === id)
         console.log(getCartvalues);
-        dispatch({ type: 'ADD_TO_CART', payload: getCartvalues })
+        console.log(cart);
+        if (getCartvalues !== cart) {
+             dispatch({ type: 'ADD_TO_CART', payload: getCartvalues })
+        } else {
+           dispatch({ type: "DELETE_FROM_CART", payload: id })
+        }
     }
     const opennav = () => {
         document.getElementById("trans").style.display = "block";
@@ -26,11 +30,9 @@ export default function ProductDetails() {
         document.getElementById("cross").style.display = "none";
         document.getElementById("hideAll").style.display = "block";
     }
-    console.log(typeof cart,'3');
-console.log(product);
     const deleteFromCart = (id) => {
         dispatch({ type: "DELETE_FROM_CART", payload: id })
-        console.log(cart,'3');
+
     }
     return (
         <>
@@ -42,7 +44,7 @@ console.log(product);
             <div>
                 <div>
                     <button id='change' onClick={opennav} className='cart'><GrCart /></button>
-                    <button id='cross' onClick={closenav} className='cart'>&times;</button>
+                    <button id='cross' onClick={closenav} className='cart'><RxCross2/></button>
                     <div id='trans'>
                         <div className='align adjust'>
                             {
@@ -52,7 +54,7 @@ console.log(product);
                                             <div className='card'>
                                                 <div className='cont'>
                                                     <img src={item.url} alt='' className='image-card ' />
-                                                    <button onClick={() => deleteFromCart(item.id)} className='add-cross'>-</button>
+                                                    <Buttons  onClick={() => deleteFromCart(item.id)} className='add-cross' name={'-'} />
                                                 </div>
                                                 <div className='containor'>
                                                     <div>{item.product}</div>
@@ -76,7 +78,7 @@ console.log(product);
                                     <div className='card'>
                                         <div className='cont'>
                                             <img src={item.url} alt='' className='image-card' />
-                                            <button onClick={() => addToCart(item.id)} className='add-cart'>+</button>
+                                            <Buttons id='drop' onClick={() => cartAdding(item.id)} className='add-cart' name={'+'} />
                                         </div>
                                         <div className='containor'>
                                             <div>{item.product}</div>
